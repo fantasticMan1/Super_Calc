@@ -64,11 +64,13 @@ class ViewController: NSViewController {
                 result = String(num1! / num2!)
             }
             
-        } else if num1 == nil || num2 == nil{
+        } else {
             
             result = "You Fool!  That's not a number!  Try again!"
             
-        } else if selectedOperation == 0 {
+        }
+        
+        if selectedOperation == 0 {
             
             result = "You need to select an operation! \nWhat's the matter with you?"
             
