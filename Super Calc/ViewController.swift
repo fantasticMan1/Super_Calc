@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSWindowDelegate {
 
     @IBOutlet weak var opsPopup: NSPopUpButton!
     @IBOutlet weak var chooseOperation: NSMenuItem!
@@ -22,6 +22,10 @@ class ViewController: NSViewController {
     var result: String = ""
     
     fileprivate let possibleOperations = ["Select Operation", "Add", "Subtract", "Multiply", "Divide"]
+    
+    override func viewDidAppear() {
+        self.view.window?.delegate = self
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +82,10 @@ class ViewController: NSViewController {
         resultTextField.stringValue = result
         
     }
-
+    
+    func windowShouldClose(_ sender: Any) {
+        NSApplication.shared().terminate(self)
+    }
 
 }
 
