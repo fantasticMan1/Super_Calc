@@ -48,26 +48,30 @@ class ViewController: NSViewController {
         let num1 = Double(num1TextField.stringValue)
         let num2 = Double(num2TextField.stringValue)
         
-
-        //the index for the addition option
-        if selectedOperation == 1 {
-            result = String(num1! + num2!)
-        //the index for the subtraction option
-        } else if selectedOperation == 2 {
-            result = String(num1! - num2!)
-        //the index for the multiplication option
-        } else if selectedOperation == 3 {
-            result = String(num1! * num2!)
-        //the index for the division option
-        } else if selectedOperation == 4 {
-            result = String(num1! / num2!)
-        }
-        
-        
-        if num1 == nil || num2 == nil{
+        if num1 != nil && num2 != nil {
+            
+            //the index for the addition option
+            if selectedOperation == 1 {
+                result = String(num1! + num2!)
+            //the index for the subtraction option
+            } else if selectedOperation == 2 {
+                result = String(num1! - num2!)
+            //the index for the multiplication option
+            } else if selectedOperation == 3 {
+                result = String(num1! * num2!)
+            //the index for the division option
+            } else if selectedOperation == 4 {
+                result = String(num1! / num2!)
+            }
+            
+        } else if num1 == nil || num2 == nil{
+            
             result = "You Fool!  That's not a number!  Try again!"
+            
         } else if selectedOperation == 0 {
+            
             result = "You need to select an operation! \nWhat's the matter with you?"
+            
         }
         resultTextField.stringValue = result
         
