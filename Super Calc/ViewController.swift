@@ -141,7 +141,11 @@ class ViewController: NSViewController, NSWindowDelegate {
                     
                     result = "I'm tired right now and don't feel like\n multiplying. That's too much energy."
                     
-                } else if num1! >= 10.0 && num2! < 10.0 {
+                } else if num1! < 10.0 && num2! >= 10.0{
+                
+                    result = "Your horoscope is not looking good, \nmy friend.  I will read your palm again \nfor a fee"
+                    
+                }else if num1! >= 10.0 && num2! < 10.0 {
                     
                     result = "The answer is ... TACOS!"
                     
