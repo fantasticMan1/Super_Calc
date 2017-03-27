@@ -23,6 +23,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var literalModeRadiobutton: NSButton!
     
     var result: String = ""
+    var sarcasticMode = false
     
     fileprivate let possibleOperations = ["Select Operation", "Add", "Subtract", "Multiply", "Divide"]
     
@@ -58,9 +59,19 @@ class ViewController: NSViewController, NSWindowDelegate {
         let selectedOperation = opsPopup.indexOfSelectedItem
         let num1 = Double(num1TextField.stringValue)
         let num2 = Double(num2TextField.stringValue)
+        var result: String = ""
         
-        let result = calculateResult(num1: num1, num2: num2, selectedOperation: selectedOperation)
+        if sarcasticModeRadioButton.state == NSOnState {
+        
+            result = calculateSarcasticResult(num1: num1, num2: num2,
+                                                  selectedOperation: selectedOperation)
+            
+        } else {
+        
+            result = calculateResult(num1: num1, num2: num2,
+                                         selectedOperation: selectedOperation)
 
+        }
         resultTextField.stringValue = result
         
     }
@@ -87,6 +98,64 @@ class ViewController: NSViewController, NSWindowDelegate {
                 //the index for the division option
             } else if selectedOperation == 4 {
                 result = String(num1! / num2!)
+            }
+            
+        } else {
+            
+            result = "Please insert an actual number"
+            
+        }
+        
+        if selectedOperation == 0 {
+            
+            result = "Please select an operation \nfrom the menu"
+        }
+        
+        return result
+        
+    }
+    
+    func calculateSarcasticResult(num1: Double?, num2: Double?, selectedOperation: Int) -> String {
+        
+        var result: String = ""
+        
+        if num1 != nil && num2 != nil {
+            
+            //the index for the addition option
+            if selectedOperation == 1 {
+                
+                //concatenate the values instead of adding them (1 + 1 = 11)
+                result = String(Int(num1!)) + String(Int(num2!))
+                
+            //the index for the subtraction option
+            } else if selectedOperation == 2 {
+                
+                //return a random number
+                result = String(arc4random())
+                
+            //the index for the multiplication option
+            } else if selectedOperation == 3 {
+            
+                //return a different string of text depending on the value of num1 and num1
+                if num1! < 10.0 && num2! < 10.0 {
+                    
+                    result = "I'm tired right now and don't feel like\n multiplying. That's too much energy."
+                    
+                } else if num1! >= 10.0 && num2! < 10.0 {
+                    
+                    result = "The answer is ... TACOS!"
+                    
+                } else if num1! >= 10.0 && num2! >= 10.0 {
+                    
+                    result = "An error occurred, and you \naren't smart enough to figure it out. \nCome back another day after the error \nis fixed."
+                }
+                
+            //the index for the division option
+            } else if selectedOperation == 4 {
+            
+                //Subtract instead of dividing
+                result = String(num1! - num2!)
+            
             }
             
         } else {
